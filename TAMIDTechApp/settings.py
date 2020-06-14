@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'TAMIDTechApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wkmrpcbrjhxlqg',
-        'USER': 'da3iqqb3tepe86',
+        'NAME': 'da3iqqb3tepe86',
+        'USER': 'wkmrpcbrjhxlqg',
         'PASSWORD': '9cb5d0cbba3f22863a99ed4a14c69ce7d15c1eca84384f533d73ba61c681e9bb',
         'HOST': 'ec2-34-198-243-120.compute-1.amazonaws.com',
         'PORT': '5432',

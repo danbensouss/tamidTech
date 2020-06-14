@@ -138,19 +138,22 @@
                     <button type="submit" name="join_network" class="btn btn-primary">
                         Join Network
                     </button>
-                    <br>
-                    {% if error %}
-                    <br>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{error}}
-                        <!-- Button -->
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                        </button>
-    
-                    </div>
-                    {% endif %}
-                    <br>
+                </form><br>
+
+                {% if error %}
+                <br>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{error}}
+                    <!-- Button -->
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+
+                </div>
+                {% endif %}
+
+                <br>
+                <form method="POST">
                     <h2>
                         Create a private network!
                     </h2>
@@ -158,6 +161,7 @@
                         Create Network
                     </button>
                 </form>
+
             </div>
         </div> <!-- / .row -->
     </div>
