@@ -1,0 +1,162 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="main-content">
+
+    
+
+   <!-- HEADER -->
+   <div class="header">
+    <div class="container-fluid">
+
+        <!-- Body -->
+        <div class="header-body">
+            <div class="row align-items-end">
+                <div class="col">
+
+                    <!-- Title -->
+                    <h1 class="header-title">
+                        {{network.title}}
+                    </h1>
+
+                </div>
+
+            </div> <!-- / .row -->
+        </div> <!-- / .header-body -->
+
+    </div>
+</div> <!-- / .header -->
+
+    <!-- CONTENT -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-xl-8">
+
+          <!-- Card -->
+          {% for search in searches %}
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-auto">
+
+                  <!-- Avatar -->
+                  <a href="profile-posts.html" class="avatar avatar-lg">
+                    <img src="{{ search.thumbnail }}" alt="..." class="avatar-img rounded-circle">
+                  </a>
+
+                </div>
+                
+                <div class="col ml-n2">
+
+                  <!-- Title -->
+                  <h4 class="mb-1">
+                    <a href="profile-posts.html">{{ search.text }}</a>
+                  </h4>
+
+                  <!-- Text -->
+                  <p class="card-text small text-muted mb-1">
+                    {{ search.title }}
+                  </p>
+
+                  <!-- Text -->
+                  <p class="card-text small text-muted mb-1">
+                    Searched by: {{ search.user_profile.user.username }}
+                  </p>
+
+                </div>
+                
+              </div> <!-- / .row -->
+            </div> <!-- / .card-body -->
+          </div>
+          {% endfor %}
+
+        </div>
+        <div class="col-12 col-xl-4">
+
+          <!-- Card -->
+          <div class="card">
+            <div class="card-body">
+
+              <!-- List group -->
+              <div class="list-group list-group-flush my-n3">
+                <div class="list-group-item">
+                  <div class="row align-items-center">
+                    <div class="col">
+
+                      <!-- Title -->
+                      <h5 class="mb-0">
+                        Member Count
+                      </h5>
+
+                    </div>
+                    <div class="col-auto">
+
+                      <!-- Text -->
+                      <small class="text-muted">
+                        {{count}}
+                      </small>
+
+                    </div>
+                  </div> <!-- / .row -->
+                </div>
+                <div class="list-group-item">
+                  <div class="row align-items-center">
+                    <div class="col">
+
+                      <!-- Title -->
+                      <h5 class="mb-0">
+                        Created
+                      </h5>
+
+                    </div>
+                    <div class="col-auto">
+
+                      <!-- Time -->
+                      <time class="small text-muted" datetime="2018-10-28">
+                        {{network.date_created|date:"F d, Y"}}
+                      </time>
+
+                    </div>
+                  </div> <!-- / .row -->
+                </div>
+                <div class="list-group-item">
+                  <div class="row align-items-center">
+                    <div class="col">
+
+                      <!-- Title -->
+                      <h5 class="mb-0">
+                        Privacy
+                      </h5>
+
+                    </div>
+                    <div class="col-auto">
+
+                      <!-- Text -->
+                      <small class="text-muted">
+                        Private
+                      </small>
+
+                    </div>
+                  </div> <!-- / .row -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div> <!-- / .row -->
+    </div>
+
+  </div>
+
+
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}

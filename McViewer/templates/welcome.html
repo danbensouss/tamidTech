@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="card" style="display: flex; justify-content: center; margin: 10em 5em;">
+    <div class="card-body text-center">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-xl-8">
+
+                <!-- Image -->
+                <img src="http://127.0.0.1:8000/media/images/logo.jpg"alt="..." class="img-fluid mt-n5 mb-4" style="max-width: 272px;">
+
+                <!-- Title -->
+                <h2>
+                    Welcome to the McViewer Network! 
+                </h2>
+
+                <!-- Content -->
+                <p class="text-muted">
+                    McViewer enables users to stream the infinitely vast amount of online video content in a simple and personalized viewer.
+                    Users can also see what other people on the McViewer Network are searching and join private networks with whoever they want. 
+                </p>
+
+                <!-- Button -->
+                <a href="{% url 'sign_up' %}" class="btn btn-primary lift">
+                    Sign up
+                </a>
+
+            </div>
+        </div> <!-- / .row -->
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}

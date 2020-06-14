@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="main-content">
+
+
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="container-fluid">
+
+            <!-- Body -->
+            <div class="header-body">
+                <div class="row align-items-end">
+                    <div class="col">
+
+                        <!-- Pretitle -->
+                        <h6 class="header-pretitle">
+                            Here are a list of the private networks you are a part of!
+                        </h6>
+
+                        <!-- Title -->
+                        <h1 class="header-title">
+                            The Network
+                        </h1>
+
+                    </div>
+
+                </div> <!-- / .row -->
+            </div> <!-- / .header-body -->
+
+        </div>
+    </div> <!-- / .header -->
+
+    <!-- CONTENT -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-xl-8">
+
+                <!-- Card -->
+                {% if count > 0 %}
+                {% for network in networks %}
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+
+                            <!-- Avatar -->
+                            <a href="{% url 'private_network' network.referral_code %}" class="avatar avatar-lg">
+                                {{network.title}}
+                            </a>
+
+                        </div>
+
+                    </div> <!-- / .row -->
+                </div> <!-- / .card-body -->
+                {% endfor %}
+
+                {% else %}
+                <h2 class="header-title">
+                    You aren't in any private networks yet!
+                </h2>
+
+                {% endif %}
+            </div>
+        </div> <!-- / .row -->
+    </div>
+
+</div>
+
+
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="header">
+  <div class="container-fluid">
+
+      <!-- Body -->
+      <div class="header-body">
+          <div class="row align-items-end">
+              <div class="col">
+
+                  <!-- Title -->
+                  <h1 class="header-title">
+                      Create a Private Network
+                  </h1>
+
+              </div>
+
+          </div> <!-- / .row -->
+      </div> <!-- / .header-body -->
+
+  </div>
+</div> <!-- / .header -->
+
+<div class="card" style="display: flex; justify-content: center; margin: 2.5em 5em;">
+  <div class="card-body">
+
+    <!-- Form -->
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="col-12 col-md-6 mb-3">
+          <label for="validationServer01">Network Name</label>
+          <input name="network_name" type="text" class="form-control is-valid"
+            id="validationServer01" placeholder="Name" required>
+          <div class="valid-feedback">
+          </div>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+          <label for="validationServer02">Referral Code</label>
+          <input name="referral-code" type="text" class="form-control is-valid"
+            id="validationServer02" placeholder="Code" required>
+          <div class="valid-feedback">
+          </div>
+        </div>
+      </div>
+      {% if error %}
+     <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{error}}
+        <!-- Button -->
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+      {% endif %}
+
+
+      <!-- Button -->
+      <button class="btn btn-primary" name="createNetwork" type="submit">Create Network</button>
+    </form>
+
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}

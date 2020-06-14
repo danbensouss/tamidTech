@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="main-content">
+
+
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="container-fluid">
+
+            <!-- Body -->
+            <div class="header-body">
+                <div class="row align-items-end">
+                    <div class="col">
+
+                        <!-- Pretitle -->
+                        <h6 class="header-pretitle">
+                            Here you can see what other poeple on our network are searching for!
+                        </h6>
+
+                        <!-- Title -->
+                        <h1 class="header-title">
+                            The Network
+                        </h1>
+
+                    </div>
+
+                </div> <!-- / .row -->
+            </div> <!-- / .header-body -->
+
+        </div>
+    </div> <!-- / .header -->
+
+    <!-- CONTENT -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-xl-8">
+
+                <!-- Card -->
+                {% for search in searches %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+
+                                <!-- Avatar -->
+                                <a href="{% url 'getRelatedSearch' search.video_id %}" class="avatar avatar-lg">
+                                    <img src="{{ search.thumbnail }}" alt="..." class="avatar-img rounded-circle">
+                                </a>
+
+                            </div>
+
+                            <div class="col ml-n2">
+
+                                <!-- Title -->
+                                <h4 class="mb-1">
+                                    <a href="{% url 'getRelatedSearch' search.video_id %}">{{ search.text }}</a>
+                                </h4>
+
+                                <!-- Text -->
+                                <p class="card-text small text-muted mb-1">
+                                    {{ search.title }}
+                                </p>
+
+
+
+                            </div>
+
+                        </div> <!-- / .row -->
+                    </div> <!-- / .card-body -->
+                </div>
+                {% endfor %}
+
+            </div>
+            <div class="col-12 col-xl-4">
+
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-body">
+
+                        <!-- List group -->
+                        <div class="list-group list-group-flush my-n3">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+
+                                        <!-- Title -->
+                                        <h5 class="mb-0">
+                                            McViewer Users
+                                        </h5>
+
+                                    </div>
+                                    <div class="col-auto">
+
+                                        <!-- Text -->
+                                        <small class="text-muted">
+                                            {{count}}
+                                        </small>
+
+                                    </div>
+                                </div> <!-- / .row -->
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+
+                                        <!-- Title -->
+                                        <h5 class="mb-0">
+                                            Privacy
+                                        </h5>
+
+                                    </div>
+                                    <div class="col-auto">
+
+                                        <!-- Text -->
+                                        <small class="text-muted">
+                                            Public
+                                        </small>
+
+                                    </div>
+                                </div> <!-- / .row -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <h2>
+                        Join a private network!
+                    </h2>
+                    <input type="text" name="code" required>
+                    <button type="submit" name="join_network" class="btn btn-primary">
+                        Join Network
+                    </button>
+                    <br>
+                    {% if error %}
+                    <br>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{error}}
+                        <!-- Button -->
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
+    
+                    </div>
+                    {% endif %}
+                    <br>
+                    <h2>
+                        Create a private network!
+                    </h2>
+                    <button type="submit" name="create_network" class="btn btn-primary">
+                        Create Network
+                    </button>
+                </form>
+            </div>
+        </div> <!-- / .row -->
+    </div>
+
+</div>
+
+
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}

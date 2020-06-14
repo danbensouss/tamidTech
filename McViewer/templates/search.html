@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<!-- HEADER -->
+<div class="header">
+    <div class="container-fluid">
+
+        <!-- Body -->
+        <div class="header-body">
+            <div class="row align-items-end">
+                <div class="col">
+
+                    <!-- Pretitle -->
+                    <h6 class="header-pretitle">
+                        Here are the search results for:
+                    </h6>
+
+                    <!-- Title -->
+                    <h1 class="header-title">
+                        {% if search.text is None %}
+                        {{ videoDisplayed.title }}
+                        {% else %}
+                        {{search.text }}
+                        {% endif %}
+                    </h1>
+
+                </div>
+
+            </div> <!-- / .row -->
+        </div> <!-- / .header-body -->
+
+    </div>
+</div> <!-- / .header -->
+<div class="search_container" style="display:flex; flex-flow:row; justify-content: flex-start ">
+    <div class="large_video" style="width: 65%">
+        <div class="card" style="margin-left: 2em;">
+
+            <!-- Image -->
+            <a href="project-overview.html">
+                <iframe width="100%" height="500" src="https://www.youtube.com/embed/{{videoDisplayed.id}}"
+                    frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </a>
+
+            <!-- Body -->
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col">
+
+                        <!-- Title -->
+                        <h4 class="mb-2 name">
+                            {{videoDisplayed.title}}
+                        </h4>
+
+                        <!-- Subtitle -->
+                        <p class="card-text small text-muted">
+                            {{videoDisplayed.duration}}
+                        </p>
+
+                    </div>
+                
+                </div> <!-- / .row -->
+            </div>
+
+        </div>
+    </div>
+    <div class="up_next_videos" style="width: 30%; margin-left: 2em;">
+        <h1>More Results:</h1>
+        {% for video in upNextVideos %}
+        <div class="card">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-auto">
+
+                  <!-- Avatar -->
+                  <a href="{% url 'getRelatedSearch' video.id %}" class="avatar avatar-lg avatar-4by3">
+                    <img src="{{video.thumbnail}}" alt="..." class="avatar-img rounded">
+                  </a>
+
+                </div>
+                <div class="col ml-n2">
+
+                  <!-- Title -->
+                  <h4 class="mb-1 name">
+                    <a href="{% url 'getRelatedSearch' video.id %}">{{video.title}}</a>
+                  </h4>
+
+                  <!-- Text -->
+                  <p class="card-text small text-muted mb-1">
+                    <time datetime="2018-06-21">{{video.duration}}</time>
+                  </p>
+
+
+                </div>
+                <div class="col-auto">
+
+        
+
+                </div>
+            
+              </div> <!-- / .row -->
+            </div> <!-- / .card-body -->
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
+
+
+{% block javascript %}
+
+
+{% endblock javascript %}

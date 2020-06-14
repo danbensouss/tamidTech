@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+<!-- MAIN CONTENT
+    ================================================== -->
+<div class="main-content">
+
+
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <!-- Image -->
+    <img src="{{ userprofile.cover_photo.url }}" class="header-img-top" alt="...">
+
+    <div class="container-fluid">
+
+      <!-- Body -->
+      <div class="header-body mt-n5 mt-md-n6">
+        <div class="row align-items-end">
+          <div class="col-auto">
+
+            <!-- Avatar -->
+            <div class="avatar avatar-xxl header-avatar-top">
+              <img src="{{ userprofile.display_picture.url }}" alt="..."
+                class="avatar-img rounded-circle border border-4 border-body">
+            </div>
+
+          </div>
+          <div class="col mb-3 ml-n3 ml-md-n2">
+            <!-- Pretitle -->
+            <h6 class="header-pretitle">
+              Welcome to the McViewer Network,
+            </h6>
+
+            <!-- Title -->
+            <h1 class="header-title">
+              {{userprofile.user.first_name}} {{userprofile.user.last_name}}
+            </h1>
+
+          </div>
+
+        </div> <!-- / .row -->
+        <div class="row align-items-center">
+          <div class="col">
+
+            <!-- Nav -->
+            <ul class="nav nav-tabs nav-overflow header-tabs">
+            </ul>
+
+          </div>
+        </div>
+      </div> <!-- / .header-body -->
+
+    </div>
+  </div>
+
+
+
+  <!-- CONTENT -->
+  {% if numOfSearches < 1 %}
+  <div class="col-12" style="padding: 0em 2.45em;">
+    <div class="alert alert-success" role="alert">
+
+      <!-- Heading -->
+      <h4 class="alert-heading">Welcome to the McViewer Network!</h4>
+      
+      <!-- Divider -->
+      <hr>
+
+      <!-- Text -->
+      <p>
+        Seemlessly search through the infinitely vast world of online video content! Check out Our Network to see what
+        people like you are searching for!
+      </p>
+
+    </div>
+  </div>
+
+  {% endif %}
+  <div data-list='{"valueNames": ["name"]}'>
+    <div class="container-fluid" data-list='{"valueNames": ["name"], "listClass": "listAlias"}'>
+      <div class="row mb-4">
+        <div class="col">
+
+
+          <div class="card">
+            <div class="card-body">
+
+              <!-- Form -->
+              <form action="{% url 'search_result' %}" method="GET">
+                {% csrf_token %}
+                <input type="text" name="search" class="form-control form-control-rounded" placeholder="Search Here!"
+                  required>
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+        <div class="col-auto">
+
+          <!-- Navigation (button group) -->
+          <div class="nav btn-group" role="tablist">
+            <button class="btn btn-lg btn-white active" data-toggle="tab" data-target="#tabPaneOne" role="tab"
+              aria-controls="tabPaneOne" aria-selected="true">
+              <span class="fe fe-grid"></span>
+            </button>
+            <button class="btn btn-lg btn-white" data-toggle="tab" data-target="#tabPaneTwo" role="tab"
+              aria-controls="tabPaneTwo" aria-selected="false">
+              <span class="fe fe-list"></span>
+            </button>
+          </div> <!-- / .nav -->
+
+        </div>
+      </div> <!-- / .row -->
+
+      <!-- Tab content -->
+      <div class="tab-content">
+        <div class="tab-pane fade active show" id="tabPaneOne" role="tabpanel">
+          <div class="row listAlias">
+            {% for search in recentSearches %}
+            <div class="col-12 col-md-6 col-xl-4">
+
+              <!-- Card -->
+              <div class="card">
+
+                <!-- Image -->
+                <a href="{% url 'getRelatedSearch' search.video_id %}">
+                  <img src="{{ search.thumbnail }}" alt="..." class="card-img-top">
+                </a>
+
+                <!-- Body -->
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col">
+
+                      <!-- Title -->
+                      <h4 class="mb-2 name">
+                        <a href="{% url 'getRelatedSearch' search.video_id %}">{{ search.text }}</a>
+                      </h4>
+
+                      <!-- Subtitle -->
+                      <p class="card-text small text-muted">
+                        {{ search.title }}
+                      </p>
+
+                    </div>
+                  </div> <!-- / .row -->
+                </div>
+              </div>
+
+            </div>
+            {% endfor %}
+
+          </div> <!-- / .row -->
+        </div>
+        <div class="tab-pane fade" id="tabPaneTwo" role="tabpanel">
+          <div class="row list">
+            {% for search in recentSearches %}
+            <div class="col-12">
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+
+                      <!-- Avatar -->
+                      <a href="{% url 'getRelatedSearch' search.video_id %}" class="avatar avatar-lg avatar-4by3">
+                        <img src="{{ search.thumbnail }}" alt=" ..." class="avatar-img rounded">
+                      </a>
+
+                    </div>
+                    <div class="col ml-n2">
+
+                      <!-- Title -->
+                      <h4 class="mb-1 name">
+                        <a href="{% url 'getRelatedSearch' search.video_id %}">{{ search.text }}</a>
+                      </h4>
+
+                      <!-- Text -->
+                      <p class="card-text small text-muted mb-1">
+                        <time datetime="2018-06-21">{{ search.title }}</time>
+                      </p>
+
+                      <!-- Progress -->
+                      <div class="row align-items-center no-gutters">
+                        <div class="col-auto">
+
+                        </div>
+                      </div> <!-- / .row -->
+
+                    </div>
+                    <div class="col-auto">
+
+                    </div>
+                  </div> <!-- / .row -->
+                </div> <!-- / .card-body -->
+              </div>
+
+            </div>
+            {% endfor %}
+          </div> <!-- / .row -->
+        </div>
+      </div> <!-- / .tab-content -->
+
+    </div>
+  </div>
+
+</div> <!-- / .main-content -->
+
+
+{% endblock content %}
+
+{% block javascript %}
+
+{% endblock javascript %}
