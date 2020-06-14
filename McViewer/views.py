@@ -110,12 +110,12 @@ def searchResult(request):
             videos = getSearchedVideos(search, 7)
             
             if Search.objects.filter(user_profile=user_profile, title=videos[0]['title']).exists():
-                newSearch = Search.objects.get(user_profile=user_profile, title=videoDisplayed['title'])
-                newSearch.text = videoDisplayed['title']
+                newSearch = Search.objects.get(user_profile=user_profile, title=videos[0]['title'])
+                newSearch.text = videos[0]['title']
                 newSearch.date_searched = date.today()
             elif Search.objects.filter(user_profile=user_profile, text=videos[0]['title']).exists():
-                newSearch = Search.objects.get(user_profile=user_profile, text=videoDisplayed['title'])
-                newSearch.title = videoDisplayed['title']
+                newSearch = Search.objects.get(user_profile=user_profile, text=videos[0]['title'])
+                newSearch.title = videos[0]['title']
                 newSearch.date_searched = date.today()
             else: 
                 newSearch = Search.objects.create(
