@@ -12,6 +12,7 @@ from django.forms import ValidationError
 from datetime import date
 from .forms import *
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 # This method checks whether the user performing the request is authenticated.
 # If they are authenticated, meaning they have signed up for McViewer, they are redirected to their homepage.
@@ -109,18 +110,13 @@ def searchResult(request):
 
             videos = getSearchedVideos(search, 7)
             
-            if Search.objects.filter(user_profile=user_profile, title=videos[0]['title']).exists():
-                newSearch = Search.objects.get(user_profile=user_profile, title=videos[0]['title'])
-                newSearch.text = videos[0]['title']
-                newSearch.date_searched = date.today()
-            elif Search.objects.filter(user_profile=user_profile, text=videos[0]['title']).exists():
-                newSearch = Search.objects.get(user_profile=user_profile, text=videos[0]['title'])
-                newSearch.title = videos[0]['title']
-                newSearch.date_searched = date.today()
+            if Search.objects.filter(user_profile=user_profile, text=search).exists():
+                newSearch = Search.objects.get(user_profile=user_profile, text=search)
+                newSearch.date_searched = timezone.now()
             else: 
                 newSearch = Search.objects.create(
                     text = search,
-                    date_searched = date.today(),
+                    date_searched = timezone.now(),
                     user_profile = user_profile,
                     title = videos[0]['title'],
                     video_id = videos[0]['id'],
@@ -254,15 +250,15 @@ def getRelatedSearch(request, id):
         if Search.objects.filter(user_profile=user_profile, title=videoDisplayed['title']).exists():
             newSearch = Search.objects.get(user_profile=user_profile, title=videoDisplayed['title'])
             newSearch.text = videoDisplayed['title']
-            newSearch.date_searched = date.today()
+            newSearch.date_searched = timezone.now()
         elif Search.objects.filter(user_profile=user_profile, text=videoDisplayed['title']).exists():
             newSearch = Search.objects.get(user_profile=user_profile, text=videoDisplayed['title'])
             newSearch.title = videoDisplayed['title']
-            newSearch.date_searched = date.today()
+            newSearch.date_searched = timezone.now()
         else:
             newSearch = Search.objects.create(
                 text = videoDisplayed['title'],
-                date_searched = date.today(),
+                date_searched = timezone.now(),
                 user_profile = user_profile,
                 title = videoDisplayed['title'],
                 video_id = videoDisplayed['id'],
@@ -383,7 +379,7 @@ def createNetwork(request):
                 'error':'A private network with this referral code already exists.',
             })
         else:
-            private_network = PrivateNetwork.objects.create(title = the_name, date_created = date.today(), referral_code = the_referral_code)
+            private_network = PrivateNetwork.objects.create(title = the_name, date_created = timezone.now(), referral_code = the_referral_code)
             private_network.users.add(user_profile)
             private_network.save()
             return redirect('private_network', referral_code = the_referral_code)
