@@ -1,0 +1,1 @@
+web: gunicorn TAMIDTechApp.wsgi --log-file -
