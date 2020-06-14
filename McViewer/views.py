@@ -159,7 +159,7 @@ def getSearchedVideos(search, numResults):
         }
     video_ids = []
     res = requests.get(search_url, params = search_params)
-        
+    print(res.json())    
     search_results = res.json()['items']
     for result in search_results:
         video_ids.append(result['id']['videoId'])
@@ -218,7 +218,7 @@ def getRelatedSearch(request, id):
             'maxResults' : 6
         }
         res = requests.get(video_url, params = video_params)
-
+        print(res.json())
         related_results = res.json()['items']
 
         videos = []

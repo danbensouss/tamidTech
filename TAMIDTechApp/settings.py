@@ -141,7 +141,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'McViewer/media')
 
-YOUTUBE_API_KEY = 'AIzaSyBYCGrGCn6wIwv722ZpZetFlC7jIif43SQ'
+YOUTUBE_API_KEY = 'AIzaSyAH0SpA-S7g7wnnu8LWxiOJ9GY93oPXIoU'
 
 import dj_database_url 
 prod_db  =  dj_database_url.config(conn_max_age=500)
